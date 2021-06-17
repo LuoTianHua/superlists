@@ -2,7 +2,7 @@ from django.test import TestCase
 from django.urls import resolve
 from lists.views import home_page
 from django.http import HttpRequest
-for lists.models import Item
+from lists.models import Item
 
 
 # Create your tests here.
@@ -32,4 +32,4 @@ class ItemModelTest(TestCase):
         seconde_saved_item = saved_items[1]
         self.assertEqual(first_saved_item.text,'The first (ever) list item')
         self.assertEqual(seconde_saved_item.text, 'Item the second')
-        self.assertEqual(seconde_saved_item.text, 'Item the second')a
+        self.assertEqual(seconde_saved_item.text, 'Item the second')
