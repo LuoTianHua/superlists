@@ -2,11 +2,11 @@ from selenium import webdriver #导入包 webdriver
 import unittest
 from selenium.webdriver.common.keys import Keys
 import time
-
+from django.test import LiveServerTestCase
 #browser = webdriver.Firefox( executable_path=r"C:\Program Files\Mozilla Firefox\firefox.exe")
 
 
-class NewVisitorTest(unittest.TestCase):
+class NewVisitorTest(LiveServerTestCase):
     def setUp(self):
         self.brower = webdriver.Firefox()
     def tearDown(self):
@@ -18,14 +18,11 @@ class NewVisitorTest(unittest.TestCase):
         self.assertIn(row_text,[row.text for row in rows])
 
     def test_can_start_a_list_and_retrieve_it_later(self):
-        self.brower.get('http://localhost:8000')
+        self.brower.get(self.live_server_url)
         self.assertIn('To-Do',self.brower.title)
         header_text = self.brower.find_element_by_tag_name('h1').text
         self.assertIn('To-Do', header_text)
 
-        inputbox.send_keys(Keys.ENTER)
-        time.sleep(1)
-        self.check_for_row_in_list_table('1:Buy peacock feathers')
 
         inputbox = self.brower.find_element_by_id('id_new_item')
 
@@ -46,5 +43,3 @@ class NewVisitorTest(unittest.TestCase):
 
         self.fail('finish the test')
 
-if __name__=='__main__':
-    unittest.main(warnings="ignore")
